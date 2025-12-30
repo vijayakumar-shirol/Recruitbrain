@@ -1,0 +1,46 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Select Candidates</h2>
+            <button class="close-btn" (click)="close()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search candidates..." [(ngModel)]="searchTerm"
+                    (input)="filterCandidates()">
+            </div>
+
+            <div class="candidate-list">
+                <div *ngFor="let candidate of filteredCandidates" class="candidate-item"
+                    [class.selected]="isSelected(candidate)" (click)="toggleSelection(candidate)">
+
+                    <div class="checkbox">
+                        <i class="fas fa-check" *ngIf="isSelected(candidate)"></i>
+                    </div>
+
+                    <div class="candidate-info">
+                        <h3>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
+                        <span class="position" *ngIf="candidate.currentPosition">{{ candidate.currentPosition }}</span>
+                        <span class="company" *ngIf="candidate.currentCompany"> at {{ candidate.currentCompany }}</span>
+                    </div>
+                </div>
+
+                <div *ngIf="filteredCandidates.length === 0" class="no-results">
+                    No candidates found matching "{{ searchTerm }}"
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="selection-count" *ngIf="selectedCandidates.length > 0">
+                {{ selectedCandidates.length }} candidate(s) selected
+            </div>
+            <button class="btn-cancel" (click)="close()">Cancel</button>
+            <button class="btn-confirm" [disabled]="selectedCandidates.length === 0" (click)="confirm()">Assign</button>
+        </div>
+    </div>
+</div>

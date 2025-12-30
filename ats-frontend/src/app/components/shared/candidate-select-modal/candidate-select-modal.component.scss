@@ -1,0 +1,228 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-container {
+    background: white;
+    width: 95%;
+    max-width: 550px;
+    border-radius: 5px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    animation: slideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: #1e293b;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: #64748b;
+        cursor: pointer;
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.2s;
+
+        &:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+    }
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 1rem;
+
+    i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+
+        &:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+    }
+}
+
+.candidate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.candidate-item {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &:hover {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+    }
+
+    &.selected {
+        border-color: #6366f1;
+        background: #f5f3ff;
+
+        .checkbox {
+            background: #6366f1;
+            border-color: #6366f1;
+
+            i {
+                opacity: 1;
+            }
+        }
+    }
+
+    .checkbox {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 2px solid #cbd5e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        background: white;
+        flex-shrink: 0;
+
+        i {
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    }
+
+    .candidate-info {
+        h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        span {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+    }
+}
+
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    color: #94a3b8;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+
+    .selection-count {
+        margin-right: auto;
+        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    button {
+        padding: 0.625rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-cancel {
+        background: white;
+        border: 1px solid #e2e8f0;
+        color: #64748b;
+
+        &:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+    }
+
+    .btn-confirm {
+        background: #6366f1;
+        border: 1px solid #6366f1;
+        color: white;
+
+        &:hover {
+            background: #4f46e5;
+        }
+
+        &:disabled {
+            background: #94a3b8;
+            border-color: #94a3b8;
+            cursor: not-allowed;
+        }
+    }
+}

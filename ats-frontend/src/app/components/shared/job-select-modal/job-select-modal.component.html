@@ -1,0 +1,41 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Select Job</h2>
+            <button class="close-btn" (click)="close()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search jobs..." [(ngModel)]="searchTerm" (input)="filterJobs()">
+            </div>
+
+            <div class="job-list">
+                <div *ngFor="let job of filteredJobs" class="job-item" [class.selected]="selectedJob?.id === job.id"
+                    (click)="selectJob(job)">
+                    <div class="job-info">
+                        <h3>{{ job.title }}</h3>
+                        <span class="client-name">{{ job.client.name }}</span>
+                    </div>
+                    <div class="job-meta">
+                        <span class="status" [class]="job.status.toLowerCase()">{{ job.status }}</span>
+                        <span class="location" *ngIf="job.location"><i class="fas fa-map-marker-alt"></i> {{
+                            job.location }}</span>
+                    </div>
+                </div>
+
+                <div *ngIf="filteredJobs.length === 0" class="no-results">
+                    No jobs found matching "{{ searchTerm }}"
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" (click)="close()">Cancel</button>
+            <button class="btn-confirm" [disabled]="!selectedJob" (click)="confirm()">Assign</button>
+        </div>
+    </div>
+</div>
