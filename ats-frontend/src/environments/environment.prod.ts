@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'RENDER_BACKEND_URL/api'
+  apiUrl: 'https://ats-backend-53mj.onrender.com/api'
 };
