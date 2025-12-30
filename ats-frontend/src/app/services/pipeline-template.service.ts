@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PipelineTemplate } from '../models/pipeline-template.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PipelineTemplateService {
-  private apiUrl = 'http://localhost:8080/api/pipeline-templates';
+  private apiUrl = `${environment.apiUrl}/pipeline-templates`;
 
   constructor(private http: HttpClient) {}
 
